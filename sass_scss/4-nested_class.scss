@@ -1,0 +1,14 @@
+/* nested_class */
+
+/* The goal of this task is to use nested declarations to assign the text colour #3D3D3D to elements inside
+body tags, but the text colour #FF0000 to any element of class .red inside body tag */
+
+$Text_Colour: #3D3D3D;
+$Red_Colour: #FF0000;
+
+body {
+    color: $Text_Colour;
+    .red {
+        color: $Red_Colour;
+    }
+}

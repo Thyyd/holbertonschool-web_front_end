@@ -1,0 +1,20 @@
+/* color_variables */
+
+/* The goal of this task is to use a SASS variable to assign the text colour '#3D3D3D' to HTML tags body and p and
+another SASS variable to assign the background colour #6D6D6D to HTML tags body and h2. */
+
+$Text_Colour: #3D3D3D;
+$Background_Colour: #6D6D6D;
+
+body {
+    color: $Text_Colour;
+    background-color: $Background_Colour;
+}
+
+p {
+    color: $Text_Colour;
+}
+
+h2 {
+    background-color: $Background_Colour;
+}

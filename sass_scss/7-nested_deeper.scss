@@ -1,0 +1,15 @@
+/* nested_deeper */
+
+/* The goal of this task is to use nested declarations to assign a 14px font size to all body tags,
+but a 16px font size for all h1 tags inside body tags and a 12px font size for all h1 tags with
+the .smaller class inside body tags. */
+
+body {
+    font-size: 14px;
+    h1 {
+        font-size: 16px;
+        &.smaller {
+            font-size: 12px;
+        }
+    }
+}

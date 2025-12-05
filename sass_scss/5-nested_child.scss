@@ -8,7 +8,7 @@ $Red_Colour: #FF0000;
 
 body {
     color: $Text_Colour;
-    .red:first-child {
+    > .red:first-child {
         color: $Red_Colour;
     }
 }

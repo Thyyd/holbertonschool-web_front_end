@@ -1,0 +1,15 @@
+/* nested_hover */
+
+/* The goal of this task is to use nested declarations to assign the text colour #FF0000 to button tags,
+but the text colour #00FF00 when the user hovers the button. */
+
+$Text_Colour: #FF0000;
+$Hover_Colour: #00FF00;
+
+button {
+    color: $Text_Colour;
+}
+
+button:hover {
+        color: $Hover_Colour;
+}

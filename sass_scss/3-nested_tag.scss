@@ -1,0 +1,12 @@
+/* nested_tag */
+
+/* The goal of this task is to use nested declarations to assign a margin and a padding of 0px in
+body tags, but a 10px margin in every p tags inside body tag */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    p {
+        margin: 10px;
+    }
+}

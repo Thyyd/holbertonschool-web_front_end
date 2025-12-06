@@ -1,0 +1,12 @@
+/* loop_photos */
+
+/* The goal of this task is to use @use declarations to import some a list of names from another file
+to create a class for each name in the list to assign the background image based on the name */
+
+@use './11-photos.scss' as pic;
+
+@each $name in pic.$list-names {
+  .photo-#{$name} {
+    background: url("photos/#{$name}.jpg") no-repeat;
+  }
+}

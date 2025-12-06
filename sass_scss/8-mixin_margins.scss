@@ -1,0 +1,18 @@
+/* mixin_margins */
+
+/* The goal of this task is to use @mixin declarations to assign a 10px margin to body tags,
+and a 15px margin for all div tags. */
+
+@mixin margin($side, $margin_value) {
+    #{$side}: $margin_value;
+}
+
+body {
+    @include margin(margin-left, 10px);
+    @include margin(margin-right, 10px);
+}
+
+div {
+    @include margin(margin-left, 15px);
+    @include margin(margin-right, 15px);
+}

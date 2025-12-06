@@ -7,6 +7,6 @@ to create a class for each name in the list to assign the background image based
 
 @each $name in pic.$list-names {
   .photo-#{$name} {
-    background: image-url("photos/#{$name}.jpg") no-repeat;
+    background: image-url("photos/#{$name}.jpg") no-repeat; /* Erreur : "image-url" attendu, et pas juste "url" */
   }
 }

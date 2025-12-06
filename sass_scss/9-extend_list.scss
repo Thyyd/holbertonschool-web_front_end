@@ -1,0 +1,18 @@
+/* extend_list */
+
+/* The goal of this task is to use @extend declarations to extend the style of the class .info
+by assigning a different text colour according if the tag is .success class or .warning class. */
+
+.info {
+    font-size: 12px;
+}
+
+.success {
+    @extend .info;
+    color: #00FF00;
+}
+
+.warning {
+    @extend .info;
+    color: #FF0000;
+}

@@ -1,0 +1,19 @@
+/* import_colors */
+
+/* The goal of this task is to use @import declarations to import some variables from another file
+to assign different values to different classes. Here, we're going to change the text color of
+the classes named .red, .green and .blue. */
+
+@import './10-colors.scss';
+
+.red {
+    color: $red;
+}
+
+.green {
+    color: $green;
+}
+
+.blue {
+    color: $blue;
+}

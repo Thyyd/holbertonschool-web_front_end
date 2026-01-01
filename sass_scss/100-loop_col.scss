@@ -1,0 +1,10 @@
+/* loop_col */
+
+/* The goal of this task is to use @for statement to create 'col-*' classes where '*' is the number of the column
+and determins the width of it. We must create '.col-*' classes from 1 to 4. */
+
+@for $i from 1 through 4 {
+    .col-#{$i} {
+        width: (100% / #{$i});
+    }
+}

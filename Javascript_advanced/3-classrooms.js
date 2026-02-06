@@ -13,7 +13,7 @@ function createClassRoom(numbersOfStudents)
     let students = [];
     for(i = 1; i <= numbersOfStudents; i++)
     {
-        students.push(studentSeat(i));
+        students.push(studentSeat(i)); // Ajoute l'élément à la fin du tableau
     }
     return students;
 }

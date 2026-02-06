@@ -19,3 +19,8 @@ function createClassRoom(numbersOfStudents)
 }
 
 classRoom = createClassRoom(10);
+
+
+console.log(classRoom[0]());
+console.log(classRoom[3]());
+console.log(classRoom[9]());

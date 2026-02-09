@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <head>
+        <script
+            src="https://code.jquery.com/jquery-4.0.0.min.js"
+            integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
+            crossorigin="anonymous"></script>
+        <meta charset="utf-8" />
+        <title>Task 0</title>
+        <script type="application/javascript">
+            $(document).ready(function() { //Vérifie si le jQuerry est disponible
+                function createSearchForm()
+                {
+                    const form = $("<form></form>").append(
+                        $("<input>").attr({ type: "text"}),
+                        $("<input>").attr({ type: "submit", value: "Submit" }),
+                        $("<ul></ul>")
+                    );
+
+                    $("body").append(form);
+
+                    form.on("click", "input[type='submit']", function(e) { // Équivalent de .addEventListener.
+                        e.preventDefault(); // Fait en sorte que le form ne recharge pas la page automatiquement.
+
+                        const textValue = $("input:first").val();
+
+                        queryWikipedia(textValue);
+                    })
+                }
+
+                function addNewArticle(id, title, snippet)
+                {
+                    const list = $("<li></li>").append(
+                        $("<p></p>").append(
+                            $("<span></span>").text(id + " - "),
+                            $("<b></b>").text(title)),
+                        $("<p></p>").html(snippet)
+                    );
+                    $("form ul").append(list);
+                }
+
+                function queryWikipedia(search)
+                {
+                    const data = { // Objet contenant les paramètres envoyés (data)
+                        action: "query", // Requête
+                        list: "search", // Recherche
+                        srsearch: search,
+                        format: "json",
+                        origin: "*" // Pour ne pas bloquer le CORS
+                    };
+
+                    $.ajax({ // Requête ajax
+                        type: "GET", // Requête GET
+                        url: "https://en.wikipedia.org/w/api.php",
+                        data: data,
+                        success: function (response) { // S'effectue uniquement si la requête réussit
+
+                            response.query.search.forEach(function (result) { // Pour chaque résultat, affiche une nouvelle ligne
+                                addNewArticle(
+                                    result.pageid,
+                                    result.title,
+                                    result.snippet
+                                );
+                            });
+
+                        }
+                    });
+                }
+
+                createSearchForm();
+            })
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+
+</html>

@@ -1,0 +1,39 @@
+{
+  "posts": [
+    {
+      "title": "",
+      "author": "",
+      "id": "6"
+    },
+    {
+      "title": "",
+      "author": "",
+      "id": "7"
+    },
+    {
+      "title": "",
+      "author": "",
+      "id": "8"
+    },
+    {
+      "title": "",
+      "author": "",
+      "id": "9"
+    },
+    {
+      "title": "",
+      "author": "",
+      "id": "10"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

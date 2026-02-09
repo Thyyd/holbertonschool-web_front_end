@@ -1,0 +1,16 @@
+{
+  "name": "jquery_advanced",
+  "version": "1.0.0",
+  "description": "Dans ce projet, nous allons apprendre différentes utilisations de JQuerry, comme :\r - Comment charger une JQuerry d'un CDN sur une page\r - Comment créer des éléments de DOM avec JQuerry\r - Comment ajouter, modifier, ou encore mettre des événements sur des éléments\r - Comment créer de la pagination\r - Comment envoyer des requêtes POST, GET, etc...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "json-server": "^1.0.0-beta.5"
+  }
+}

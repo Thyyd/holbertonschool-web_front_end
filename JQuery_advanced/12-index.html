@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <head>
+        <script
+            src="https://code.jquery.com/jquery-4.0.0.min.js"
+            integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
+            crossorigin="anonymous"></script>
+        <meta charset="utf-8" />
+        <title>Task 0</title>
+        <script type="application/javascript">
+            $(document).ready(function() { //Vérifie si le jQuerry est disponible
+                function addPostRow(data)
+                {
+                    let paragraph = $("<p></p>").attr({id: "row-"+data.id}).append(
+                        $("<span></span>").text("(delete)").on("click", function() {
+                            deletePost(data.id);
+                        }),
+                        $("<span></span>").text("Post created with id " + data.id + ", title: " + data.title + ", author: " + data.author)
+                    );
+                    $("body").append(paragraph);
+                }
+
+                function listPosts()
+                {
+                    $.get("http://localhost:3000/posts", function(data) {
+                        // Ce bloc ne s'exécute que si le serveur renvoie 200
+                        data.forEach(post => addPostRow(post)); // Pour chaque donnée renvoyée par le serveur, on utilise addPostRow
+                    }).fail(function() {
+                        alert("Server Error");
+                    });
+                }
+
+                function buildForm()
+                {
+                    const form = $("<form></form>").on("submit", function(e) {
+                            e.preventDefault(); // Fait en sorte que le form ne recharge pas la page automatiquement.
+
+                            sendForm();
+                        }).append(
+                        $("<div></div>").append(
+                            $("<label></label>").attr({for: "author"}).text("Author").append(
+                                $("<input>").attr({type: "text", id: "author"})
+                            )
+                        ),
+                        $("<div></div>").append(
+                            $("<label></label>").attr({for: "title"}).text("Title").append(
+                                $("<textarea>").attr({id: "title"})
+                            )
+                        ),
+                        $("<input>").attr({ type: "submit"})
+                    );
+                    $("body").append(form);
+                }
+
+                function sendForm()
+                {
+                    $("form").after($("<p></p>").text("About to send the query to the API"));
+                    const data = { // Objet contenant les paramètres rentrés dans les inputs
+                        title: $("#title").val(),
+                        author: $("#author").val()
+                    }
+                    $.post("http://localhost:3000/posts", data, function(response) {
+                        // Ce bloc ne s'exécute que si le serveur renvoie 200
+                        addPostRow(response); // exécution de la fonction addPostRow
+                    }).fail(function() {
+                        alert("Error sending the POST query");
+                    });
+                }
+
+                function deletePost(id)
+                {
+                    $.ajax({
+                        url: "http://localhost:3000/posts/" + id, // DELETE sur le post avec cet ID
+                        type: "DELETE",
+                        success: function(response) {
+                        $("#row-" + id).remove(); // Quand le (delete) est cliqué, il supprime toute la balise p dont l'id est row-id.
+                    },
+                        error: function() {
+                            alert("Post was not deleted");
+                        }
+                    });
+                }
+
+                listPosts();
+                buildForm();
+            })
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+
+</html>

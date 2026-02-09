@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <head>
+        <script
+            src="https://code.jquery.com/jquery-4.0.0.min.js"
+            integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
+            crossorigin="anonymous"></script>
+        <meta charset="utf-8" />
+        <title>Task 0</title>
+        <script type="application/javascript">
+            $(document).ready(function() { //Vérifie si le jQuerry est disponible
+                function createSearchForm()
+                {
+                    const form = $("<form></form>").append(
+                        $("<input>").attr({ type: "text"}),
+                        $("<input>").attr({ type: "submit", value: "Submit" }),
+                        $("<ul></ul>")
+                    );
+
+                    $("body").append(form);
+                    $("body").append($("<ul></ul>", {id: "pagination"}));
+
+                    form.on("click", "input[type='submit']", function(e) { // Équivalent de .addEventListener.
+                        e.preventDefault(); // Fait en sorte que le form ne recharge pas la page automatiquement.
+
+                        const textValue = $("input:first").val();
+
+                        queryWikipedia(textValue);
+                    })
+                }
+
+                function addNewArticle(id, title, snippet)
+                {
+                    const list = $("<li></li>").append(
+                        $("<p></p>").append(
+                            $("<span></span>").text(id + " - "),
+                            $("<b></b>").text(title)),
+                        $("<p></p>").html(snippet)
+                    );
+                    $("form ul").append(list);
+                }
+
+                function queryWikipedia(search, offset = 0)
+                {
+                    const data = { // Objet contenant les paramètres envoyés (data)
+                        action: "query", // Requête
+                        list: "search", // Recherche
+                        srsearch: search,
+                        format: "json",
+                        origin: "*", // Pour ne pas bloquer le CORS
+                        sroffset: offset/*, // Ajout de l'offset
+                        srlimit: 10*/ // Ajout d'une limite maximale de résultats renvoyés par la requête
+                    };
+
+                    $.ajax({ // Requête ajax
+                        type: "GET", // Requête GET
+                        url: "https://en.wikipedia.org/w/api.php",
+                        data: data,
+                        success: function (response) { // S'effectue uniquement si la requête réussit
+                            $("form ul").html(""); // Reset des résultats
+                            response.query.search.forEach(function (result) { // Pour chaque résultat, affiche une nouvelle ligne
+                                addNewArticle(
+                                    result.pageid,
+                                    result.title,
+                                    result.snippet
+                                );
+                            });
+                            buildPagination(response.query.searchinfo.totalhits, 10, offset);
+                        }
+                    });
+                }
+
+                function buildPagination(numberOfItems, itemsPerPage, currentOffset)
+                {
+                    const pagination = $("#pagination"); // Lien avec la liste d'id pagination
+
+                    pagination.html(""); // Reset de la pagination
+                    const numberOfPages = Math.ceil(numberOfItems / itemsPerPage); // Calcul du nombre de pages
+
+                    for (let i = 0; i < numberOfPages; i++) {
+
+                        const pageNumber = i + 1; // Numéro de la page
+                        const offset = i * itemsPerPage; // Offset
+
+                        const li = $("<li></li>") // Affichage du numéro de la page
+                            .text(pageNumber)
+                            .css({cursor: "pointer", marginLeft: "10px", display: "inline-block"});
+
+                        if (offset === currentOffset) { // Si c'est la page courante, affichage en gras
+                            li.css("font-weight", "bold");
+                        }
+
+                        li.on("click", function () { // Quand on clique sur un numéro de page, ça change la page
+                            queryWikipedia(
+                                $("input:first").val(),
+                                offset
+                            );
+                        });
+                        pagination.append(li);
+                    }
+
+                }
+                createSearchForm();
+            })
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+
+</html>

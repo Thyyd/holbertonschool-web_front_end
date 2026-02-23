@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+		<meta charset="utf-8"/>
+	    <title>Coockies Test</title>
+	</head>
+    <body>
+        <h1>Login to the website</h1>
+        <input type="text" name="Firstname" id="firstname" placeholder="Firstname">
+        <input type="text" name="Email" id="email" placeholder="Email">
+        <button class="setCookies" onclick="setCookies()">Log me in</button>
+        <h2>Cookies</h2>
+        <button class="showCookies" onclick="showCookies()">Show the cookies</button>
+
+        <script>
+            // Fonction setCookies
+            function setCookies()
+            {
+                const firstname = document.getElementById("firstname").value;
+                const email = document.getElementById("email").value;
+
+                const expireDate = new Date();
+                expireDate.setDate(expireDate.getDate() + 10); // Utilisation de la date et non du temps en ms.
+                const expires = "expires=" + expireDate.toUTCString();
+
+                // Ajoute les cookies firtsname et email
+                document.cookie = "firstname=" + firstname;
+                document.cookie = "email=" + email;
+            }
+
+            // Fonction getCookie
+            function getCookie(name) {
+                const cookies = document.cookie.split(";"); // Transformation de la chaîne de caractère en tableau
+
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = cookies[i].trim(); // enlève les espaces
+
+                    if (cookie.startsWith(name + "=")) { // Si le nom commence par "name="
+                        return cookie.substring(name.length + 1); // Return la valeur après le "="
+                    }
+                }
+                return ""; // Sinon retourne chaîne de caractère vide
+            }
+
+            // Fonction showCookies
+            function showCookies()
+            {
+                const p = document.createElement("p");
+                const email = getCookie("email"); // Bien mettre entre "" le name, sinon il ne le trouve pas
+                const firstname = getCookie("firstname");
+                p.innerHTML = "Email: " + email + " - Firstname: " + firstname;
+                document.body.appendChild(p);
+            }
+        </script>
+    </body>
+</html>

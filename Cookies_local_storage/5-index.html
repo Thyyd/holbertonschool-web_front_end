@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+		<meta charset="utf-8"/>
+	    <title>Local-storage Test</title>
+	</head>
+    <body>
+        <script>
+            const availableItems = ["Shampoo", "Soap", "Sponge", "Water"];
+
+            // Vérification est ce que le Local Storage est disponible sur le navigateur
+            if (typeof window.localStorage === "undefined") {
+                alert("Sorry, your browser does not support Web storage. Try again with a better one");
+                }
+            else {
+                createStore();
+                displayCart();
+            }
+
+            // Fonction addItemToCart
+            function addItemToCart(item)
+            {
+                localStorage.setItem(item, true);
+            }
+
+            // Fonction createStore
+            function createStore()
+            {
+                const ul = document.createElement("ul");
+                document.body.appendChild(ul);
+
+                for (let i = 0; i < availableItems.length; i++) {
+                    const li = document.createElement("li");
+                    li.textContent = availableItems[i];
+                    li.addEventListener('click', function() {
+                        addItemToCart(availableItems[i]);
+                    })
+                    ul.appendChild(li);
+                }
+            }
+
+            // Fonction displayCart
+            function displayCart()
+            {
+                if (localStorage.length === 0) {
+                    return;
+                }
+                else {
+                    const paragraph = document.createElement("p");
+                    const number_items = localStorage.length;
+                    paragraph.textContent = `You previously had ${number_items} items in your cart`;
+                    document.body.appendChild(paragraph);
+                }
+            }
+
+        </script>
+    </body>
+</html>

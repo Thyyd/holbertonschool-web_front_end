@@ -1,0 +1,46 @@
+.border-bottom {
+    border-bottom-color: #E0003C !important; /* Change la couleur de la bordure de la div "Compagny name" */
+}
+
+.btn-primary {
+    background-color: #E0003C;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #BC1340;
+}
+
+.btn-outline-primary {
+    color: #E0003C;
+    border-color: #E0003C;
+}
+
+a, a:focus, a:hover {
+    color: #E0003C;
+}
+
+.card,
+.card-header,
+.card-footer {
+    border-color: #E0003C;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+}
+
+.card-header {
+    background-color: #E0003C;
+    color: white;
+}
+
+.card-header:first-child {
+    border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0; /* Arrondit les coins haut droit et haut gauche du container */
+}
+
+.text-muted {
+    color: #8C8C8C;
+}
